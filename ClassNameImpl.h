@@ -27,10 +27,19 @@ public:
 	virtual std::string to_string () const override;
 
 protected:
+	wptr _self;
+
+	void _init();
+	void _copy (ClassNameImpl::cptr rhs);
+	void _update();
+
+	int _prop1;
+	int _prop2;
+
+protected:
 	class protected_token {}; /* exists to prevent public use of ctor */
 						 	  /* we want the ctor to be public so we can use make_shared in Create()
 							   * which reduces heap fragmentation */
-
 public:
 	ClassNameImpl() = delete;
 	ClassNameImpl(protected_token) {}
@@ -42,15 +51,6 @@ public:
 	ClassNameImpl& operator= (const ClassNameImpl &) = delete;	
 	ClassNameImpl& operator= (ClassNameImpl &&) = delete;	
 
-protected:
-	wptr _self;
-
-	void _init();
-	void _copy (ClassNameImpl::cptr rhs);
-	void _update();
-
-	int _prop1;
-	int _prop2;
 };
 
 #if 0
